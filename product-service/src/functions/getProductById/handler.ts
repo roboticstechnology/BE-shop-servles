@@ -8,7 +8,7 @@ import products from '../../db/products.json';
 
 export const getProductById = async (event) => {
   const { id } = event.pathParameters;
-  // console.log('id:', id);
+  console.log(event);
   const product = await getProduct(products, id);
   // console.log('product', product);
 
