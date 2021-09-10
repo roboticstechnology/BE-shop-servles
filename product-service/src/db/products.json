@@ -1,0 +1,44 @@
+[
+    {
+      "id": "1",
+      "title": "SAMSUNG Galaxy S20",
+      "price": 549,
+      "count": 1,
+      "description": "SAMSUNG Galaxy S20 FE 5G Factory Unlocked Android Cell Phone 128GB US Version Smartphone Pro-Grade Camera 30X Space Zoom Night Mode, Cloud Navy"
+    },
+    {
+      "id": "2",
+      "title": "Moto G Power",
+      "price": 199.99,
+      "count": 1,
+      "description": "Moto G Power | 2021 | 3-Day battery | Unlocked | Made for US by Motorola | 4/64GB | 48MP Camera | Gray"
+    },
+    {
+      "id": "3",
+      "title": "Moto G Power",
+      "price": 219.99,
+      "count": 1,
+      "description": "Moto G Power | 3-Day Battery1 | Unlocked | Made for US by Motorola | 4/64GB | 16MP Camera | 2020 | Black"
+    },
+    {
+      "id": "4",
+      "title": "TracFone My Flip 2",
+      "price": 19.88,
+      "count": 1,
+      "description": "TracFone My Flip 2 4G LTE Prepaid Flip Phone (Locked) - Black - 4GB - Sim Card Included - CDMA"
+    },
+    {
+      "id": "5",
+      "title": "Samsung Electronics Galaxy A12",
+      "price": 179,
+      "count": 1,
+      "description": "Samsung Electronics Galaxy A12, Factory Unlocked Smartphone, Android Cell Phone, Multi-Camera System, Expandable Storage, US Version, 32GB, Black"
+    },
+    {
+      "id": "6",
+      "title": "OnePlus Nord N200",
+      "price": 239.99,
+      "count": 1,
+      "description": "OnePlus Nord N200 | 5G Unlocked Android Smartphone U.S Version | 6.49 Full HD+LCD Screen | 90Hz Smooth Display | Large 5000mAh Battery | Fast Charging | 64GB Storage | Triple Camera"
+    }
+  ]
