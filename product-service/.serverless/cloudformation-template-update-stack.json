@@ -167,7 +167,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/product-service/dev/1631432961492-2021-09-12T07:49:21.492Z/product-service.zip"
+          "S3Key": "serverless/product-service/dev/1632334215258-2021-09-22T18:10:15.258Z/product-service.zip"
         },
         "Handler": "src/functions/getProductsList/handler.main",
         "Runtime": "nodejs14.x",
@@ -176,7 +176,12 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PG_HOST": "lesson4-db-2.cvcjeqq9inue.eu-west-1.rds.amazonaws.com",
+            "PR_PORT": "5432",
+            "PG_DATABASE": "lesson4_db",
+            "PG_USERNAME": "postgres",
+            "PG_PASSWORD": "90786anv"
           }
         },
         "Role": {
@@ -197,7 +202,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/product-service/dev/1631432961492-2021-09-12T07:49:21.492Z/product-service.zip"
+          "S3Key": "serverless/product-service/dev/1632334215258-2021-09-22T18:10:15.258Z/product-service.zip"
         },
         "Handler": "src/functions/getProductById/handler.main",
         "Runtime": "nodejs14.x",
@@ -206,7 +211,12 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
-            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+            "PG_HOST": "lesson4-db-2.cvcjeqq9inue.eu-west-1.rds.amazonaws.com",
+            "PR_PORT": "5432",
+            "PG_DATABASE": "lesson4_db",
+            "PG_USERNAME": "postgres",
+            "PG_PASSWORD": "90786anv"
           }
         },
         "Role": {
@@ -220,24 +230,24 @@
         "GetProductByIdLogGroup"
       ]
     },
-    "GetProductsListLambdaVersionzglE1fa6Bt7lj37UHeLyQyi7P4lrZg8jq7lsr701I": {
+    "GetProductsListLambdaVersionOcwLdOFOMyQeCO1eJQBKXMnWieP43OItM2NZD0IdCo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetProductsListLambdaFunction"
         },
-        "CodeSha256": "EAm98YjlAv1x7lNtZhGVtAuydCe1aTKTuFj7ABp7wMA="
+        "CodeSha256": "BiZHUNYz7qZ0LepzOTqhSZ98NPbokfhW1n61OMful2k="
       }
     },
-    "GetProductByIdLambdaVersionuG58uwcW38YDM6BM38qjpH1vZxaivM8X6WrUqMbXqw": {
+    "GetProductByIdLambdaVersionhgjd6WibkdXrQvOOXpNh4SB0MwMH3VlkiHesj8J2Uk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetProductByIdLambdaFunction"
         },
-        "CodeSha256": "EAm98YjlAv1x7lNtZhGVtAuydCe1aTKTuFj7ABp7wMA="
+        "CodeSha256": "BiZHUNYz7qZ0LepzOTqhSZ98NPbokfhW1n61OMful2k="
       }
     },
     "ApiGatewayRestApi": {
@@ -477,7 +487,7 @@
         "GetProductByIdLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1631432938999": {
+    "ApiGatewayDeployment1632334193101": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -579,7 +589,7 @@
     "GetProductsListLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetProductsListLambdaVersionzglE1fa6Bt7lj37UHeLyQyi7P4lrZg8jq7lsr701I"
+        "Ref": "GetProductsListLambdaVersionOcwLdOFOMyQeCO1eJQBKXMnWieP43OItM2NZD0IdCo"
       },
       "Export": {
         "Name": "sls-product-service-dev-GetProductsListLambdaFunctionQualifiedArn"
@@ -588,7 +598,7 @@
     "GetProductByIdLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetProductByIdLambdaVersionuG58uwcW38YDM6BM38qjpH1vZxaivM8X6WrUqMbXqw"
+        "Ref": "GetProductByIdLambdaVersionhgjd6WibkdXrQvOOXpNh4SB0MwMH3VlkiHesj8J2Uk"
       },
       "Export": {
         "Name": "sls-product-service-dev-GetProductByIdLambdaFunctionQualifiedArn"
