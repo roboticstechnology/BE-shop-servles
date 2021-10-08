@@ -13,7 +13,7 @@ const importProductsFile = async (event) => {
         const params = { Bucket: S3_BUCKET, Key: objectKey, Expires: 3600, ContentType: 'text/csv' };
         const url = await s3.getSignedUrlPromise('putObject', params);
 
-        return formatJSONResponse({ url }, 200);
+        return formatJSONResponse(url, 200);
     } catch (e) {
         console.log(e);
         return formatJSONResponse('internal error', 500);
