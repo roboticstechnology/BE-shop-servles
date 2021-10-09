@@ -259,7 +259,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1633789090260-2021-10-09T14:18:10.260Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1633790614844-2021-10-09T14:43:34.844Z/product-service.zip"
               },
               "Handler": "src/functions/getProductsList/handler.main",
               "Runtime": "nodejs14.x",
@@ -300,7 +300,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1633789090260-2021-10-09T14:18:10.260Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1633790614844-2021-10-09T14:43:34.844Z/product-service.zip"
               },
               "Handler": "src/functions/getProductById/handler.main",
               "Runtime": "nodejs14.x",
@@ -341,7 +341,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1633789090260-2021-10-09T14:18:10.260Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1633790614844-2021-10-09T14:43:34.844Z/product-service.zip"
               },
               "Handler": "src/functions/createProduct/handler.main",
               "Runtime": "nodejs14.x",
@@ -382,7 +382,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1633789090260-2021-10-09T14:18:10.260Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1633790614844-2021-10-09T14:43:34.844Z/product-service.zip"
               },
               "Handler": "src/functions/catalogBatchProcess/handler.main",
               "Runtime": "nodejs14.x",
@@ -416,44 +416,44 @@
               "CatalogBatchProcessLogGroup"
             ]
           },
-          "GetProductsListLambdaVersionrT5OQvPJgs2Wl75lEpvfXGoxhCkqMpNpoDigmIIPZWw": {
+          "GetProductsListLambdaVersion4mvQxJZzkw9COV227H2i0UJGRR95pF3SgI5DY92GtI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProductsListLambdaFunction"
               },
-              "CodeSha256": "O3rF/XzbcN1VaOBUd/JyYA7E4PHLYC6W5Kaiutun3AQ="
+              "CodeSha256": "2v+wfZV0Q1jwCgHxA5QmCCeVNTNDgoTOjkPaTypWPjU="
             }
           },
-          "GetProductByIdLambdaVersionFSbXxgndZ6wu4kPEnoo0fU8S0f2KFCJGDYI8H3X06kM": {
+          "GetProductByIdLambdaVersionhzzqoadJi64dnJc058VuaXJ7i3KrWrsbrjYjNhvL1C8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProductByIdLambdaFunction"
               },
-              "CodeSha256": "O3rF/XzbcN1VaOBUd/JyYA7E4PHLYC6W5Kaiutun3AQ="
+              "CodeSha256": "2v+wfZV0Q1jwCgHxA5QmCCeVNTNDgoTOjkPaTypWPjU="
             }
           },
-          "CreateProductLambdaVersionESeOMGAlWNmtms9chM69NSDHQSDWjcSq9dm60nXVts": {
+          "CreateProductLambdaVersionpu4HkvLyYcy576PGIfy1x0xRwxNfUzRNf7aUhR6iM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateProductLambdaFunction"
               },
-              "CodeSha256": "O3rF/XzbcN1VaOBUd/JyYA7E4PHLYC6W5Kaiutun3AQ="
+              "CodeSha256": "2v+wfZV0Q1jwCgHxA5QmCCeVNTNDgoTOjkPaTypWPjU="
             }
           },
-          "CatalogBatchProcessLambdaVersionxsEC5rS7jPFLEPJSKpQ9gJnfkuh5i061LoTL4wI": {
+          "CatalogBatchProcessLambdaVersionetbQWo1mLCGqbNEPUAA0CrXn3JxARwfyhJzlJZkmI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CatalogBatchProcessLambdaFunction"
               },
-              "CodeSha256": "O3rF/XzbcN1VaOBUd/JyYA7E4PHLYC6W5Kaiutun3AQ="
+              "CodeSha256": "2v+wfZV0Q1jwCgHxA5QmCCeVNTNDgoTOjkPaTypWPjU="
             }
           },
           "ApiGatewayRestApi": {
@@ -739,7 +739,7 @@
               "CreateProductLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1633789052440": {
+          "ApiGatewayDeployment1633790578383": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -909,6 +909,26 @@
                 "Ref": "SNSTopic"
               }
             }
+          },
+          "SNSSubscriptionFilteredByTitle": {
+            "Type": "AWS::SNS::Subscription",
+            "Properties": {
+              "Endpoint": "teachroboticstechnology@gmail.com",
+              "Protocol": "email",
+              "TopicArn": {
+                "Ref": "SNSTopic"
+              },
+              "FilterPolicy": {
+                "count": [
+                  {
+                    "numeric": [
+                      "<=",
+                      10
+                    ]
+                  }
+                ]
+              }
+            }
           }
         },
         "Outputs": {
@@ -923,7 +943,7 @@
           "GetProductsListLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductsListLambdaVersionrT5OQvPJgs2Wl75lEpvfXGoxhCkqMpNpoDigmIIPZWw"
+              "Ref": "GetProductsListLambdaVersion4mvQxJZzkw9COV227H2i0UJGRR95pF3SgI5DY92GtI"
             },
             "Export": {
               "Name": "sls-product-service-dev-GetProductsListLambdaFunctionQualifiedArn"
@@ -932,7 +952,7 @@
           "GetProductByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductByIdLambdaVersionFSbXxgndZ6wu4kPEnoo0fU8S0f2KFCJGDYI8H3X06kM"
+              "Ref": "GetProductByIdLambdaVersionhzzqoadJi64dnJc058VuaXJ7i3KrWrsbrjYjNhvL1C8"
             },
             "Export": {
               "Name": "sls-product-service-dev-GetProductByIdLambdaFunctionQualifiedArn"
@@ -941,7 +961,7 @@
           "CreateProductLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateProductLambdaVersionESeOMGAlWNmtms9chM69NSDHQSDWjcSq9dm60nXVts"
+              "Ref": "CreateProductLambdaVersionpu4HkvLyYcy576PGIfy1x0xRwxNfUzRNf7aUhR6iM"
             },
             "Export": {
               "Name": "sls-product-service-dev-CreateProductLambdaFunctionQualifiedArn"
@@ -950,7 +970,7 @@
           "CatalogBatchProcessLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CatalogBatchProcessLambdaVersionxsEC5rS7jPFLEPJSKpQ9gJnfkuh5i061LoTL4wI"
+              "Ref": "CatalogBatchProcessLambdaVersionetbQWo1mLCGqbNEPUAA0CrXn3JxARwfyhJzlJZkmI"
             },
             "Export": {
               "Name": "sls-product-service-dev-CatalogBatchProcessLambdaFunctionQualifiedArn"
@@ -1140,7 +1160,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductsListLambdaVersionrT5OQvPJgs2Wl75lEpvfXGoxhCkqMpNpoDigmIIPZWw"
+        "versionLogicalId": "GetProductsListLambdaVersion4mvQxJZzkw9COV227H2i0UJGRR95pF3SgI5DY92GtI"
       },
       "getProductById": {
         "handler": "src/functions/getProductById/handler.main",
@@ -1180,7 +1200,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductByIdLambdaVersionFSbXxgndZ6wu4kPEnoo0fU8S0f2KFCJGDYI8H3X06kM"
+        "versionLogicalId": "GetProductByIdLambdaVersionhzzqoadJi64dnJc058VuaXJ7i3KrWrsbrjYjNhvL1C8"
       },
       "createProduct": {
         "handler": "src/functions/createProduct/handler.main",
@@ -1220,7 +1240,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CreateProductLambdaVersionESeOMGAlWNmtms9chM69NSDHQSDWjcSq9dm60nXVts"
+        "versionLogicalId": "CreateProductLambdaVersionpu4HkvLyYcy576PGIfy1x0xRwxNfUzRNf7aUhR6iM"
       },
       "catalogBatchProcess": {
         "handler": "src/functions/catalogBatchProcess/handler.main",
@@ -1242,7 +1262,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "CatalogBatchProcessLambdaVersionxsEC5rS7jPFLEPJSKpQ9gJnfkuh5i061LoTL4wI"
+        "versionLogicalId": "CatalogBatchProcessLambdaVersionetbQWo1mLCGqbNEPUAA0CrXn3JxARwfyhJzlJZkmI"
       }
     },
     "resources": {
@@ -1266,6 +1286,26 @@
             "Protocol": "email",
             "TopicArn": {
               "Ref": "SNSTopic"
+            }
+          }
+        },
+        "SNSSubscriptionFilteredByTitle": {
+          "Type": "AWS::SNS::Subscription",
+          "Properties": {
+            "Endpoint": "teachroboticstechnology@gmail.com",
+            "Protocol": "email",
+            "TopicArn": {
+              "Ref": "SNSTopic"
+            },
+            "FilterPolicy": {
+              "count": [
+                {
+                  "numeric": [
+                    "<=",
+                    10
+                  ]
+                }
+              ]
             }
           }
         }
@@ -1324,7 +1364,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/product-service/dev/1633789090260-2021-10-09T14:18:10.260Z",
+    "artifactDirectoryName": "serverless/product-service/dev/1633790614844-2021-10-09T14:43:34.844Z",
     "artifact": ""
   }
 }

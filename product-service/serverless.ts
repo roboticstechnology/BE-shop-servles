@@ -72,6 +72,18 @@ const serverlessConfiguration: AWS = {
           Protocol: 'email',
           TopicArn: { Ref: 'SNSTopic' },
         },
+
+      },
+      SNSSubscriptionFilteredByTitle: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: 'teachroboticstechnology@gmail.com',
+          Protocol: 'email',
+          TopicArn: { Ref: 'SNSTopic' },
+          FilterPolicy: {
+            count: [{ numeric: ['<=', 10] }],
+          },
+        },
       },
 
     },
