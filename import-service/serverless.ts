@@ -30,12 +30,12 @@ const serverlessConfiguration: AWS = {
       {
         Effect: 'Allow',
         Action: 's3:ListBucket',
-        Resource: 'arn:aws:s3:::${env:S3_BUCKET}'
+        Resource: 'arn:aws:s3:::import-service-s3'
       },
       {
         Effect: 'Allow',
         Action: 's3:*',
-        Resource: 'arn:aws:s3:::${env:S3_BUCKET}/*'
+        Resource: 'arn:aws:s3:::import-service-s3/*'
       }
     ],
   },
@@ -44,6 +44,39 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: { importProductsFile, importFileParser },
   // functions: { importProductsFile }
+  resources: {
+    Resources: {
+      ImportFileS3Bucket: {
+        Type: 'AWS::S3::Bucket',
+        Properties: {
+          BucketName: '${env:S3_BUCKET}',
+          PublicAccessBlockConfiguration: {
+            BlockPublicAcls: true,
+            IgnorePublicAcls: true,
+            BlockPublicPolicy: true,
+            RestrictPublicBuckets: true,
+          },
+          CorsConfiguration: {
+            CorsRules: [
+              {
+                AllowedOrigins: ['*'],
+                AllowedHeaders: ['*'],
+                AllowedMethods: ['PUT'],
+              },
+            ],
+          },
+        },
+      },
+    },
+    Outputs: {
+      ImportFileBucketOutput: {
+        Value: {
+          Ref: 'ImportFileS3Bucket',
+        },
+      },
+    },
+  }
+
 };
 
 module.exports = serverlessConfiguration;
