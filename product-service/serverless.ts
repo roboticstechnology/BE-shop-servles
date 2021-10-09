@@ -4,6 +4,7 @@ import type { AWS } from '@serverless/typescript';
 import getProductsList from '@functions/getProductsList';
 import getProductById from '@functions/getProductById';
 import createProduct from '@functions/createProduct';
+import catalogBatchProcess from '@functions/catalogBatchProcess';
 
 const serverlessConfiguration: AWS = {
   service: 'product-service',
@@ -32,12 +33,72 @@ const serverlessConfiguration: AWS = {
       PR_PORT: '${env:PR_PORT}',
       PG_DATABASE: '${env:PG_DATABASE}',
       PG_USERNAME: '${env:PG_USERNAME}',
-      PG_PASSWORD: '${env:PG_PASSWORD}'
+      PG_PASSWORD: '${env:PG_PASSWORD}',
+      SNS_ARN: { Ref: 'SNSTopic' },
+      SQL_URL: { Ref: 'SQSQueue' }
     },
     lambdaHashingVersion: '20201221',
+    httpApi: {
+      cors: true,
+    },
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: 'sqs:*',
+        Resource: { 'Fn::GetAtt': ['SQSQueue', 'Arn'] },
+      },
+      {
+        Effect: 'Allow',
+        Action: ['sns:*'],
+        Resource: { Ref: 'SNSTopic' },
+      },
+    ]
   },
+
+  resources: {
+    Resources: {
+      SQSQueue: {
+        Type: 'AWS::SQS::Queue',
+        Properties: { QueueName: 'aws-task6-sqs' },
+      },
+      SNSTopic: {
+        Type: 'AWS::SNS::Topic',
+        Properties: { TopicName: 'aws-task6-sns' },
+      },
+      SNSSubscription: {
+        Type: 'AWS::SNS::Subscription',
+        Properties: {
+          Endpoint: '5777863@mail.ru',
+          Protocol: 'email',
+          TopicArn: { Ref: 'SNSTopic' },
+        },
+      },
+
+    },
+    Outputs: {
+      SQSQueueOutput: {
+        Value: {
+          Ref: 'SQSQueue',
+        },
+        Export: {
+          Name: {
+            "Fn::Sub": "${AWS::StackName}-SQSQueueOutput"
+          }
+        }
+      },
+      SQSQueueArnOutput: {
+        Value: { 'Fn::GetAtt': ['SQSQueue', 'Arn'] },
+        Export: {
+          Name: {
+            "Fn::Sub": "${AWS::StackName}-SQSQueueArnOutput"
+          }
+        }
+      },
+    },
+  },
+
   // import the function via paths
-  functions: { getProductsList, getProductById, createProduct },
+  functions: { getProductsList, getProductById, createProduct, catalogBatchProcess },
 };
 
 module.exports = serverlessConfiguration;

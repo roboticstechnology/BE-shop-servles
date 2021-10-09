@@ -23,7 +23,8 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      S3_BUCKET: '${env:S3_BUCKET}'
+      S3_BUCKET: '${env:S3_BUCKET}',
+      SQS_URL: '${cf:product-service-dev.SQSQueueOutput}'
     },
     lambdaHashingVersion: '20201221',
     iamRoleStatements: [
@@ -36,46 +37,29 @@ const serverlessConfiguration: AWS = {
         Effect: 'Allow',
         Action: 's3:*',
         Resource: 'arn:aws:s3:::import-service-s3/*'
+      },
+      {
+        Effect: 'Allow',
+        Action: ['sqs:*'],
+        Resource: '${cf:product-service-dev.SQSQueueArnOutput}',
       }
     ],
+
   },
+  // resources: {
+  //   Resources: {
+  //     SQSQueue: {
+  //       Type: 'AWS::SQS::Queue',
+  //       Properties: { QueueName: 'aws-task6-sqs' },
+  //     },
+  //   }
+  // },
 
 
   // import the function via paths
   functions: { importProductsFile, importFileParser },
   // functions: { importProductsFile }
-  resources: {
-    Resources: {
-      ImportFileS3Bucket: {
-        Type: 'AWS::S3::Bucket',
-        Properties: {
-          BucketName: '${env:S3_BUCKET}',
-          PublicAccessBlockConfiguration: {
-            BlockPublicAcls: true,
-            IgnorePublicAcls: true,
-            BlockPublicPolicy: true,
-            RestrictPublicBuckets: true,
-          },
-          CorsConfiguration: {
-            CorsRules: [
-              {
-                AllowedOrigins: ['*'],
-                AllowedHeaders: ['*'],
-                AllowedMethods: ['PUT'],
-              },
-            ],
-          },
-        },
-      },
-    },
-    Outputs: {
-      ImportFileBucketOutput: {
-        Value: {
-          Ref: 'ImportFileS3Bucket',
-        },
-      },
-    },
-  }
+
 
 };
 

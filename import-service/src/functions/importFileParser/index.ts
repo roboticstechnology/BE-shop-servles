@@ -5,11 +5,11 @@ export default {
   events: [
     {
       s3: {
-        bucket: process.env.S3_BUCKET,
+        bucket: 'import-service-s3',
         event: 's3:ObjectCreated:*',
         rules: [
           {
-            prefix: 'uploaded'
+            prefix: 'uploaded/'
           },
         ],
         existing: true

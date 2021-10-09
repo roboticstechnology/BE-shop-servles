@@ -153,6 +153,13 @@
                     "s3:*"
                   ],
                   "Resource": "arn:aws:s3:::import-service-s3/*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "sqs:*"
+                  ],
+                  "Resource": "arn:aws:sqs:eu-west-1:094910746491:aws-task6-sqs"
                 }
               ]
             }
@@ -181,7 +188,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/import-service-s3/dev/1633757860519-2021-10-09T05:37:40.519Z/import-service-s3.zip"
+          "S3Key": "serverless/import-service-s3/dev/1633786365907-2021-10-09T13:32:45.907Z/import-service-s3.zip"
         },
         "Handler": "src/functions/importProductsFile/handler.main",
         "Runtime": "nodejs14.x",
@@ -191,7 +198,8 @@
         "Environment": {
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "S3_BUCKET": "import-service-s3"
+            "S3_BUCKET": "import-service-s3",
+            "SQS_URL": "https://sqs.eu-west-1.amazonaws.com/094910746491/aws-task6-sqs"
           }
         },
         "Role": {
@@ -212,9 +220,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/import-service-s3/dev/1633757860519-2021-10-09T05:37:40.519Z/import-service-s3.zip"
+          "S3Key": "serverless/import-service-s3/dev/1633786365907-2021-10-09T13:32:45.907Z/import-service-s3.zip"
         },
-        "Handler": "src/functions/importFileParser/handler.importFileParser",
+        "Handler": "src/functions/importFileParser/handler.main",
         "Runtime": "nodejs14.x",
         "FunctionName": "import-service-s3-dev-importFileParser",
         "MemorySize": 1024,
@@ -222,7 +230,8 @@
         "Environment": {
           "Variables": {
             "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
-            "S3_BUCKET": "import-service-s3"
+            "S3_BUCKET": "import-service-s3",
+            "SQS_URL": "https://sqs.eu-west-1.amazonaws.com/094910746491/aws-task6-sqs"
           }
         },
         "Role": {
@@ -236,24 +245,24 @@
         "ImportFileParserLogGroup"
       ]
     },
-    "ImportProductsFileLambdaVersionWGRLaPOlC9De7ZTJfJyJkqHw2X5kF7LQowBc5Gn9GY": {
+    "ImportProductsFileLambdaVersionnpFTLpbhSdg7q6HXfkZoCDa8qNI9ylpXXPZIBhXZ5ZI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ImportProductsFileLambdaFunction"
         },
-        "CodeSha256": "Xr3uGLS6M8ucygxciXWChcuJYKS5w19hLVGQahQewZE="
+        "CodeSha256": "jzNBM8ZMS0jyOuC2qZrZOGtXsFK6n2lFB5aqVP/X8oQ="
       }
     },
-    "ImportFileParserLambdaVersionCYFo2bpV6h4ZZfDlpgiJbHEnX43ad6Hb0R69DzHO14": {
+    "ImportFileParserLambdaVersion21cA79nVtKD76woXOc33koFseUJkSK1cwlJ152PlC6M": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ImportFileParserLambdaFunction"
         },
-        "CodeSha256": "Xr3uGLS6M8ucygxciXWChcuJYKS5w19hLVGQahQewZE="
+        "CodeSha256": "jzNBM8ZMS0jyOuC2qZrZOGtXsFK6n2lFB5aqVP/X8oQ="
       }
     },
     "ImportFileParserCustomS31": {
@@ -271,12 +280,13 @@
           ]
         },
         "FunctionName": "import-service-s3-dev-importFileParser",
+        "BucketName": "import-service-s3",
         "BucketConfigs": [
           {
             "Event": "s3:ObjectCreated:*",
             "Rules": [
               {
-                "Prefix": "uploaded"
+                "Prefix": "uploaded/"
               }
             ]
           }
@@ -330,7 +340,7 @@
                         "s3",
                         "",
                         "",
-                        null
+                        "import-service-s3"
                       ]
                     ]
                   },
@@ -379,7 +389,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/import-service-s3/dev/1633757860519-2021-10-09T05:37:40.519Z/custom-resources.zip"
+          "S3Key": "serverless/import-service-s3/dev/1633786365907-2021-10-09T13:32:45.907Z/custom-resources.zip"
         },
         "FunctionName": "import-service-s3-dev-custom-resource-existing-s3",
         "Handler": "s3/handler.handler",
@@ -532,7 +542,7 @@
         "Name": "import-service-s3-dev | Validate request body and querystring parameters"
       }
     },
-    "ApiGatewayDeployment1633757826377": {
+    "ApiGatewayDeployment1633786332747": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -581,33 +591,6 @@
           ]
         }
       }
-    },
-    "ImportFileS3Bucket": {
-      "Type": "AWS::S3::Bucket",
-      "Properties": {
-        "BucketName": "import-service-s3",
-        "PublicAccessBlockConfiguration": {
-          "BlockPublicAcls": true,
-          "IgnorePublicAcls": true,
-          "BlockPublicPolicy": true,
-          "RestrictPublicBuckets": true
-        },
-        "CorsConfiguration": {
-          "CorsRules": [
-            {
-              "AllowedOrigins": [
-                "*"
-              ],
-              "AllowedHeaders": [
-                "*"
-              ],
-              "AllowedMethods": [
-                "PUT"
-              ]
-            }
-          ]
-        }
-      }
     }
   },
   "Outputs": {
@@ -622,7 +605,7 @@
     "ImportProductsFileLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ImportProductsFileLambdaVersionWGRLaPOlC9De7ZTJfJyJkqHw2X5kF7LQowBc5Gn9GY"
+        "Ref": "ImportProductsFileLambdaVersionnpFTLpbhSdg7q6HXfkZoCDa8qNI9ylpXXPZIBhXZ5ZI"
       },
       "Export": {
         "Name": "sls-import-service-s3-dev-ImportProductsFileLambdaFunctionQualifiedArn"
@@ -631,7 +614,7 @@
     "ImportFileParserLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ImportFileParserLambdaVersionCYFo2bpV6h4ZZfDlpgiJbHEnX43ad6Hb0R69DzHO14"
+        "Ref": "ImportFileParserLambdaVersion21cA79nVtKD76woXOc33koFseUJkSK1cwlJ152PlC6M"
       },
       "Export": {
         "Name": "sls-import-service-s3-dev-ImportFileParserLambdaFunctionQualifiedArn"
@@ -661,11 +644,6 @@
       },
       "Export": {
         "Name": "sls-import-service-s3-dev-ServiceEndpoint"
-      }
-    },
-    "ImportFileBucketOutput": {
-      "Value": {
-        "Ref": "ImportFileS3Bucket"
       }
     }
   }
