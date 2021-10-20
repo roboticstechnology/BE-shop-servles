@@ -4,6 +4,7 @@ import basicAuthorizer from '@functions/basicAuthorizer';
 
 const serverlessConfiguration: AWS = {
   service: 'authorization-service',
+  useDotenv: true,
   frameworkVersion: '2',
   custom: {
     webpack: {
@@ -11,10 +12,11 @@ const serverlessConfiguration: AWS = {
       includeModules: true,
     },
   },
-  plugins: ['serverless-webpack'],
+  plugins: ['serverless-webpack', 'serverless-dotenv-plugin'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
+    region: 'eu-west-1',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -24,6 +26,21 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: '20201221',
   },
+
+  resources: {
+    Outputs: {
+      AuthorizationARN: {
+        Description: "Authorization ARN of the token authorization",
+        Value: {
+          "Fn::GetAtt": ["BasicAuthorizerLambdaFunction", "Arn"]
+        },
+        Export: {
+          Name: 'AuthorizationARN'
+        }
+      }
+    }
+  },
+
   // import the function via paths
   functions: { basicAuthorizer },
 };

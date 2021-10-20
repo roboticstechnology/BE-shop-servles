@@ -2,4 +2,3 @@
 /import-service/node_modules/
 /authorization-service/node_modules/
 /product-service/.env
-.env
