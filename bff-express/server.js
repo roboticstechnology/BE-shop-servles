@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
+import { Cashe } from './Cashe.js'
 
 dotenv.config();
 const log = console.log;
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const cashe = new Cashe();
 
 
 app.all('/*', async (req, res) => {
@@ -28,15 +30,19 @@ app.all('/*', async (req, res) => {
 
         try {
             log(url);
+            if (urlPath === 'products' && req.method === 'GET') {
+                const dataCashe = cashe.getData;
+                if (dataCashe) return res.json(dataCashe);
 
+            }
             let respResult = await axios({
                 method: req.method,
                 url: url + req.url,
                 ...(Object.keys(req.body || {}).length > 0 && { data: req.body }),
             })
+            cashe.Data = respResult.data;
             status = respResult.status
             message = respResult.data
-            message.type = 'original'
 
         } catch (e) {
             log(e);
@@ -56,5 +62,5 @@ app.all('/*', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`app listening at http://localhost:${PORT}`)
+    console.log(`Example app listening at http://localhost:${PORT}`)
 })
