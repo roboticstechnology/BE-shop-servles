@@ -1,1 +1,6 @@
 /product-service/node_modules/
+/import-service/node_modules/
+/authorization-service/node_modules/
+/bff-express/node_modules/
+/bff-express/.elasticbeanstalk
+/product-service/.
